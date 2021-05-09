@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="3D Vehicular Platformer" />
+    <link rel="stylesheet" type="text/css" href="/dautov5/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/dautov5/css/menu.css" />
+    
+    <title>Dauto v5 - By Raggar</title>
+  </head>
+  <body>
+    <div id="container">
+    <canvas id="canvas"> </canvas>
+    
+    <div id="loadingScreen">
+      <div class="loader"></div>
+      <h1>Loading...</h1>
+    </div>
+
+    <div id="levelSelect">
+      <h1 style="position: absolute;margin:auto;left:0;right:0;bottom:0;color:white;width:100%;text-align: center;font-size: 10vh;background-color: rgba(8, 217, 245, 0.356);">Pyramid Rush</h1>
+      <a style="position: absolute;left:0;bottom:0;color:white;font-size: 8vh;"><=</a>
+      <img src="/dautov5/images/prush.png" style="position: absolute; width:60%;height:60%;margin:auto;left:0;right:0;top:0;bottom:0;border: 4px double rgba(8, 217, 245, 0.356);"></img>
+      <a style="position: absolute; right:0;bottom:0;color:white;font-size: 8vh;">=></a>
+      <div class="italic" id="menuBtn2">
+        <= BACK
+      </div>
+    </div>
+    
+    
+    <div id="click2Play" style="width:100%;height:100%;pointer-events: none;">
+      <h1 style="pointer-events: none;position: absolute;width:100%;height:100%;color:white;margin: auto;text-align: center;top:0;bottom:0;font-size: 12vh;">Click To Start</h1>
+    </div>
+
+    <div id="endgameUI">
+      <div id="endgameHeader">
+        <h1>BOOM!</h1>
+      </div>
+
+      <div id="end1" class="endgameUITableParent left top">
+        <a>Time</a><br/>
+        <table id="tableTimes" class="endgameUITable">
+          <tr>
+            <td class="width50"><img src="/dautov5/images/icon_rank_gd.png" class="width3vh"></img></td>
+            <td id="time1">00:00</td>
+          </tr>
+          <tr>
+            <td class="width50"><img src="/dautov5/images/icon_rank_sr.png" class="width3vh"></img></td>
+            <td id="time2">00:00</td>
+          </tr>
+          <tr>
+            <td class="width50"><img src="/dautov5/images/icon_rank_bn.png" class="width3vh"></img></td>
+            <td id="time3">00:00</td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="end2" class="endgameUITableParent right top">
+        <a>Stats</a><br/>
+        <table id="tableStats" class="endgameUITable">
+          <tr>
+            <td class="width50">Damage Taken</td>
+            <td id="healthLost">150</td>
+          </tr>
+          <tr>
+            <td>Turbo Used</td>
+            <td id="turboUsed">530</td>
+          </tr>
+          <tr>
+            <td>Obstacles Hit</td>
+            <td id="obstaclesHit">3</td>
+          </tr>
+          <tr>
+            <td>Top Speed</td>
+            <td id="topSpeed">84</td>
+          </tr>
+          <tr>
+            <td>Respawns</td>
+            <td id="respawns">0</td>
+          </tr>
+        </table>
+      </div>
+      <div id="end3" class="endgameUITableParent left bottom">
+        <a>Challenges</a><br/>
+        <table id="tableChallenges" class="endgameUITable"></table>
+      </div>
+      <div id="end4" class="endgameUITableParent right bottom">
+        <a>Checkpoints</a><br/>
+        <table id="tableCheckpoints" class="endgameUITable"></table>
+      </div>
+    
+      <img id="replayBtn" src="/dautov5/images/pause_btn_restart_p.png"></img>
+      
+
+    </div>
+
+    
+  <div id="customizeBtn2" style="left:4vw;top:20vh;position:absolute;display:none;">
+    <div class="italic" id="menuBtn">
+      <= BACK
+    </div>
+  </div>
+  <div id="options">
+  
+    <div class="italic" id="menuBtn3">
+      <= BACK
+    </div>
+  
+    <div id="gfx" style="width:100%;">
+      <h1 style="text-align: center;font-size: 6vh;color: wheat;">Graphics</h1>
+      <a style="color:white;font-size:6vh;float:left;">Hardware Scaling</a>
+      <select id="optionsHS" class="select-css">
+        <option value="1" id="optionsLow">Low</option>
+        <option value="2">High</option>
+        <option value="4" selected="selected">Aggressive!</option>
+      </select>
+    </div>
+      
+  <div id="ctrl" style="width:100%;float:right;">
+    <h1 style="text-align: center;font-size: 6vh;color: wheat;margin: auto;left:0;right:0;">Controls</h1>
+    <a class="ctrlbtnlbl">Forward</a>
+    <a id="fw" class="ctrlbtn">w</a>
+
+    <a class="ctrlbtnlbl">Backward</a>
+    <a id="bw" class="ctrlbtn">s</a>
+
+    <a class="ctrlbtnlbl">Left</a>
+    <a id="lf" class="ctrlbtn">a</a>
+
+    <a class="ctrlbtnlbl">Right</a>
+    <a id="rt" class="ctrlbtn">d</a>
+
+    <a class="ctrlbtnlbl">Turbo</a>
+    <a id="tb" class="ctrlbtn">Shift</a>
+
+  </div>
+ 
+</div>
+
+  <div id="main">
+    <video playsinline autoplay muted loop id="bgvid">
+      <source src="/dautov5/video/dauto_pyramid2.mp4" type="video/mp4">
+  </video>
+    <div id="left">
+      <div id="logo"><img src="/dautov5/images/dautologo.png" alt="" /></div>
+      <div id="menus">
+        <div class="italic highlight" id="startGameBtn">
+          PLAY
+        </div>
+        <div class="italic" id="selectLevelBtn">
+          SELECT LEVEL
+        </div>
+        <div class="italic" id="customizeBtn"">
+          CUSTOMIZE
+        </div>
+       
+        <div class="normal" id="selectOptionsBtn">
+          OPTIONS
+        </div>
+       
+      </div>
+     
+    </div>
+</div>
+</div>
+
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<script type="module" src="/dautov5/dist/index.js"></script>
+</body>
+</html>
+
